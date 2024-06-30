@@ -25,9 +25,20 @@ public class AplicativoController {
                 .collect(Collectors.toList());
     }
 
+   
+
     @PostMapping("/atualizacusto/{idAplicativo}")
     public AplicativoDTO atualizarCusto(@PathVariable Long idAplicativo, @RequestBody AplicativoDTO aplicativoDTO) {
         AplicativoModel atualizado = servicoDeAplicativo.atualizarCusto(idAplicativo, aplicativoDTO.getCustoMensal());
         return new AplicativoDTO(atualizado.getCodigo(), atualizado.getNome(), atualizado.getCustoMensal());
+    }
+
+
+
+
+    @PostMapping("/criar")
+    public AplicativoDTO criarAplicativo(@RequestBody AplicativoDTO aplicativoDTO) {
+        AplicativoModel criado = servicoDeAplicativo.criarAplicativo(aplicativoDTO);
+        return new AplicativoDTO(criado.getCodigo(), criado.getNome(), criado.getCustoMensal());
     }
 }
