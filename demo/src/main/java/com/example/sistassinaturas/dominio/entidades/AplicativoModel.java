@@ -1,9 +1,9 @@
 package com.example.sistassinaturas.dominio.entidades;
 
 public class AplicativoModel {
-    private Long codigo;
+    private Long codigo;      
     private String nome;
-    private Float custoMensal;
+    private Float custoMensal;      
 
     public AplicativoModel(Long codigo, String nome, Float custoMensal) {
         this.codigo = codigo;
