@@ -11,11 +11,11 @@ INSERT INTO cliente (codigo, nome, email) VALUES (8, 'Laura Lee', 'laura.lee@exa
 INSERT INTO cliente (codigo, nome, email) VALUES (9, 'Daniel Anderson', 'daniel.anderson@example.com');
 INSERT INTO cliente (codigo, nome, email) VALUES (10, 'Sarah Thomas', 'sarah.thomas@example.com');
 
-INSERT INTO aplicativo (codigo, nome, custo_mensal) VALUES (1, 'Netflix', 15.99);
-INSERT INTO aplicativo (codigo, nome, custo_mensal) VALUES (2, 'Spotify', 9.99);
-INSERT INTO aplicativo (codigo, nome, custo_mensal) VALUES (3, 'Amazon Prime', 12.99);
-INSERT INTO aplicativo (codigo, nome, custo_mensal) VALUES (4, 'Hulu', 11.99);
-INSERT INTO aplicativo (codigo, nome, custo_mensal) VALUES (5, 'Disney+', 7.99);
+INSERT INTO aplicativo (codigo, nome, custo_mensal) VALUES ('Netflix', 15.99);
+INSERT INTO aplicativo (codigo, nome, custo_mensal) VALUES ('Spotify', 9.99);
+INSERT INTO aplicativo (codigo, nome, custo_mensal) VALUES ('Amazon Prime', 12.99);
+INSERT INTO aplicativo (codigo, nome, custo_mensal) VALUES ('Hulu', 11.99);
+INSERT INTO aplicativo (codigo, nome, custo_mensal) VALUES ('Disney+', 7.99);
 
 INSERT INTO assinatura (codigo, cliente_codigo, aplicativo_codigo, inicio_vigencia, fim_vigencia) VALUES (1, 1, 1, '2024-01-01', '2024-12-31');
 INSERT INTO assinatura (codigo, cliente_codigo, aplicativo_codigo, inicio_vigencia, fim_vigencia) VALUES (2, 2, 2, '2024-02-01', '2024-12-31');

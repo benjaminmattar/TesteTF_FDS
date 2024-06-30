@@ -1,6 +1,8 @@
 package com.example.sistassinaturas.dominio.entidades;
 
 public class AplicativoModel {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long codigo;      
     private String nome;
     private Float custoMensal;      
