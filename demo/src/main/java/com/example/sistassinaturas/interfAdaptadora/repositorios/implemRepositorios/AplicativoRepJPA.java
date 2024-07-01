@@ -8,19 +8,40 @@ import com.example.sistassinaturas.interfAdaptadora.repositorios.interfJPA.Aplic
 import com.example.sistassinaturas.interfAdaptadora.repositorios.entidades.Aplicativo;
 
 import java.util.List;
+import java.util.concurrent.atomic.AtomicLong;
 import java.util.stream.Collectors;
 
 @Repository
 public class AplicativoRepJPA implements IAplicativoRepositorio {
 
     private final AplicativoJPA_ItfRep aplicativoJPA;
+    private final AtomicLong currentId = new AtomicLong(5); // Inicializando com 5 para os IDs iniciais
 
     public AplicativoRepJPA(AplicativoJPA_ItfRep aplicativoJPA) {
         this.aplicativoJPA = aplicativoJPA;
+
+        // Inicializar banco de dados com 5 aplicativos se estiver vazio
+        if (aplicativoJPA.count() == 0) {
+            aplicativoJPA.save(new Aplicativo(1L, "Netflix", 15.99f));
+            aplicativoJPA.save(new Aplicativo(2L, "Spotify", 9.99f));
+            aplicativoJPA.save(new Aplicativo(3L, "Amazon Prime", 12.99f));
+            aplicativoJPA.save(new Aplicativo(4L, "Hulu", 11.99f));
+            aplicativoJPA.save(new Aplicativo(5L, "Disney+", 7.99f));
+        } else {
+            // Definir o contador para o próximo valor após os IDs existentes
+            long maxId = aplicativoJPA.findAll().stream()
+                    .mapToLong(Aplicativo::getCodigo)
+                    .max()
+                    .orElse(5L);
+            currentId.set(maxId);
+        }
     }
 
     @Override
     public AplicativoModel save(AplicativoModel aplicativoModel) {
+        if (aplicativoModel.getCodigo() == null) {
+            aplicativoModel.setCodigo(currentId.incrementAndGet());
+        }
         Aplicativo aplicativo = new Aplicativo(aplicativoModel.getCodigo(), aplicativoModel.getNome(), aplicativoModel.getCustoMensal());
         Aplicativo savedAplicativo = aplicativoJPA.save(aplicativo);
         return new AplicativoModel(savedAplicativo.getCodigo(), savedAplicativo.getNome(), savedAplicativo.getCustoMensal());
