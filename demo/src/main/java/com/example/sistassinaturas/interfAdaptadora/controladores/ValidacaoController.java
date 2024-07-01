@@ -12,7 +12,7 @@ public class ValidacaoController {
     public ValidacaoController(ServicoDeAssinatura servicoDeAssinatura) {
         this.servicoDeAssinatura = servicoDeAssinatura;
     }
-
+    
     @GetMapping("/{codass}")
     public boolean assinaturaValida(@PathVariable Long codass) {
         return servicoDeAssinatura.assinaturaValida(codass);
