@@ -32,7 +32,7 @@ public class ServicoDeAssinatura {
         assinatura.setCliente(cliente);
         assinatura.setAplicativo(aplicativo);
         assinatura.setInicioVigencia(LocalDate.now());
-        assinatura.setFimVigencia(LocalDate.now().plusDays(7)); // 7 dias grÃ¡tis
+        assinatura.setFimVigencia(LocalDate.now().plusDays(7)); 
 
         return assinaturaRepositorio.save(assinatura);
     }

@@ -18,7 +18,8 @@ public class AssinaturaController {
         this.servicoDeAssinatura = servicoDeAssinatura;
     }
 
-    @PostMapping
+
+    @PostMapping("/cadastrar")
     public AssinaturaDTO criarAssinatura(@RequestBody AssinaturaDTO assinaturaDTO) {
         AssinaturaModel assinatura = servicoDeAssinatura.criarAssinatura(assinaturaDTO.getCodigoCliente(), assinaturaDTO.getCodigoAplicativo());
         return new AssinaturaDTO(assinatura.getCodigo(), assinatura.getCliente().getCodigo(), assinatura.getAplicativo().getCodigo(), assinatura.getInicioVigencia(), assinatura.getFimVigencia());

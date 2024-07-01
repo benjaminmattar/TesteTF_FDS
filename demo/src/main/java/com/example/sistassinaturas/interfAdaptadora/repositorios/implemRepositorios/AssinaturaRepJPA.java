@@ -12,19 +12,31 @@ import com.example.sistassinaturas.interfAdaptadora.repositorios.entidades.Assin
 import com.example.sistassinaturas.interfAdaptadora.repositorios.entidades.Cliente;
 
 import java.util.List;
+import java.util.concurrent.atomic.AtomicLong;
 import java.util.stream.Collectors;
 
 @Repository
 public class AssinaturaRepJPA implements IAssinaturaRepositorio {
 
     private final AssinaturaJPA_ItfRep assinaturaJPA;
+    private final AtomicLong currentId;
 
     public AssinaturaRepJPA(AssinaturaJPA_ItfRep assinaturaJPA) {
         this.assinaturaJPA = assinaturaJPA;
+
+        // Definir o contador para o próximo valor após os IDs existentes
+        long maxId = assinaturaJPA.findAll().stream()
+                .mapToLong(Assinatura::getCodigo)
+                .max()
+                .orElse(0L);
+        currentId = new AtomicLong(maxId);
     }
 
     @Override
     public AssinaturaModel save(AssinaturaModel assinaturaModel) {
+        if (assinaturaModel.getCodigo() == null) {
+            assinaturaModel.setCodigo(currentId.incrementAndGet());
+        }
         Assinatura assinatura = new Assinatura(
             assinaturaModel.getCodigo(),
             new Aplicativo(assinaturaModel.getAplicativo().getCodigo(), assinaturaModel.getAplicativo().getNome(), assinaturaModel.getAplicativo().getCustoMensal()),
