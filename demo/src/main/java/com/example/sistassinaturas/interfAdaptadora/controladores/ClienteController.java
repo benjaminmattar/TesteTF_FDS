@@ -1,6 +1,7 @@
 package com.example.sistassinaturas.interfAdaptadora.controladores;
 
 import com.example.sistassinaturas.aplicacao.dtos.ClienteDTO;
+import com.example.sistassinaturas.dominio.entidades.ClienteModel;
 import com.example.sistassinaturas.dominio.servicos.ServicoDeCliente;
 import org.springframework.web.bind.annotation.*;
 
@@ -22,5 +23,11 @@ public class ClienteController {
         return servicoDeCliente.listarTodos().stream()
                 .map(cliente -> new ClienteDTO(cliente.getCodigo(), cliente.getNome(), cliente.getEmail()))
                 .collect(Collectors.toList());
+    }
+
+    @PostMapping("/cadastrar")
+    public ClienteDTO cadastrarCliente(@RequestBody ClienteDTO clienteDTO) {
+        ClienteModel criado = servicoDeCliente.criarCliente(clienteDTO);
+        return new ClienteDTO(criado.getCodigo(), criado.getNome(), criado.getEmail());
     }
 }
