@@ -15,12 +15,11 @@ import java.util.stream.Collectors;
 public class ClienteRepJPA implements IClienteRepositorio {
 
     private final ClienteJPA_ItfRep clienteJPA;
-    private final AtomicLong currentId = new AtomicLong(10); // Inicializando com 10 para os IDs iniciais
+    private final AtomicLong currentId = new AtomicLong(10); 
 
     public ClienteRepJPA(ClienteJPA_ItfRep clienteJPA) {
         this.clienteJPA = clienteJPA;
 
-        // Inicializar banco de dados com 10 clientes se estiver vazio
         if (clienteJPA.count() == 0) {
             clienteJPA.save(new Cliente(1L, "Alice Johnson", "alice.johnson@example.com"));
             clienteJPA.save(new Cliente(2L, "Bob Smith", "bob.smith@example.com"));
@@ -33,7 +32,6 @@ public class ClienteRepJPA implements IClienteRepositorio {
             clienteJPA.save(new Cliente(9L, "Ivy White", "ivy.white@example.com"));
             clienteJPA.save(new Cliente(10L, "Jack Black", "jack.black@example.com"));
         } else {
-            // Definir o contador para o próximo valor após os IDs existentes
             long maxId = clienteJPA.findAll().stream()
                     .mapToLong(Cliente::getCodigo)
                     .max()

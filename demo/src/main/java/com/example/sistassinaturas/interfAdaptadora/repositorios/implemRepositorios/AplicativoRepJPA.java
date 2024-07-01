@@ -15,12 +15,11 @@ import java.util.stream.Collectors;
 public class AplicativoRepJPA implements IAplicativoRepositorio {
 
     private final AplicativoJPA_ItfRep aplicativoJPA;
-    private final AtomicLong currentId = new AtomicLong(5); // Inicializando com 5 para os IDs iniciais
+    private final AtomicLong currentId = new AtomicLong(5); 
 
     public AplicativoRepJPA(AplicativoJPA_ItfRep aplicativoJPA) {
         this.aplicativoJPA = aplicativoJPA;
 
-        // Inicializar banco de dados com 5 aplicativos se estiver vazio
         if (aplicativoJPA.count() == 0) {
             aplicativoJPA.save(new Aplicativo(1L, "Netflix", 15.99f));
             aplicativoJPA.save(new Aplicativo(2L, "Spotify", 9.99f));
@@ -28,7 +27,6 @@ public class AplicativoRepJPA implements IAplicativoRepositorio {
             aplicativoJPA.save(new Aplicativo(4L, "Hulu", 11.99f));
             aplicativoJPA.save(new Aplicativo(5L, "Disney+", 7.99f));
         } else {
-            // Definir o contador para o próximo valor após os IDs existentes
             long maxId = aplicativoJPA.findAll().stream()
                     .mapToLong(Aplicativo::getCodigo)
                     .max()

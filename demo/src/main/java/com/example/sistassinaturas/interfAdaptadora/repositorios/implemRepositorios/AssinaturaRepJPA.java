@@ -24,7 +24,6 @@ public class AssinaturaRepJPA implements IAssinaturaRepositorio {
     public AssinaturaRepJPA(AssinaturaJPA_ItfRep assinaturaJPA) {
         this.assinaturaJPA = assinaturaJPA;
 
-        // Definir o contador para o próximo valor após os IDs existentes
         long maxId = assinaturaJPA.findAll().stream()
                 .mapToLong(Assinatura::getCodigo)
                 .max()
